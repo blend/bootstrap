@@ -78,14 +78,14 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   this.render = function() {
     if ( ngModelCtrl.$viewValue ) {
       var date = new Date( ngModelCtrl.$viewValue ),
-          isValid = !isNaN(date) || !$attrs.ngRequired;
+          isValid = !isNaN(date);
 
       if ( isValid ) {
         this.activeDate = date;
-      } else {
+      } else if (!!$attrs.ngRequired){
         $log.error('Datepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
       }
-      ngModelCtrl.$setValidity('date', isValid);
+      ngModelCtrl.$setValidity('date', isValid || !$attrs.ngRequired);
     }
     this.refreshView();
   };
