@@ -78,7 +78,7 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   this.render = function() {
     if ( ngModelCtrl.$viewValue ) {
       var date = new Date( ngModelCtrl.$viewValue ),
-          isValid = !isNaN(date);
+          isValid = !isNaN(date) || !$attrs.ngRequired;
 
       if ( isValid ) {
         this.activeDate = date;
